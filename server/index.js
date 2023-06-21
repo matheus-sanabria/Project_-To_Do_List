@@ -12,6 +12,7 @@ app.use(express.json())
 // })
     
 // Rotas
+// inserir item
 app.post("/todos", async (req, res) => {
     try {
         const { description } = req.body;
@@ -24,7 +25,31 @@ app.post("/todos", async (req, res) => {
         console.log(error)
     }
 })
-// Criar item
+
+// Listar
+app.get('/todos/:id', async(req, res) => {
+    try{
+        const {id} = req.params;
+        const todo = await pool.query('SELECT * FROM todo where todo_id = $1', [id])
+        res.json(todo.rows[0])
+    } catch (error){
+        console.log(error)
+    }
+})
+
+// Listar
+
+app.get('/todos/', async(req, res) => {
+    try{
+        const {id} = req.params;
+        const todo = await pool.query('SELECT * FROM todo')
+        res.json(todo.rows)
+    } catch (error){
+        console.log(error)
+    }
+})
+
+app
 // Atualizar item
 // Visualizar item
 // Deletar item
