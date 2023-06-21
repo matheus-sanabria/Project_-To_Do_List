@@ -26,6 +26,8 @@ app.post("/todos", async (req, res) => {
     }
 })
 
+
+
 // Listar
 app.get('/todos/:id', async(req, res) => {
     try{
@@ -37,7 +39,7 @@ app.get('/todos/:id', async(req, res) => {
     }
 })
 
-// Listar
+// Listar todos
 
 app.get('/todos/', async(req, res) => {
     try{
@@ -49,10 +51,34 @@ app.get('/todos/', async(req, res) => {
     }
 })
 
-app
 // Atualizar item
-// Visualizar item
+app.put('/todos/:id', async (req, res) => {
+    try{
+        const { id } = req.params
+        const {description} = req.body
+        const updateTodo = await pool.query.query(
+            "UPDATE todo SET description = $1 WHERE todo_id = $2",
+            [description, id]
+        )
+        res.json('Item atualizado')
+    } catch (error){
+        console.log(error)
+    }
+})
 // Deletar item
+app.delete('/todos/:id', async (req, res) => {
+    try{
+        const { id } = req.params
+        const {description} = req.body
+        const deleteTodo = await pool.query(
+            "DELETE FROM todo WHERE todo_id = $1",
+            [id]
+        )
+        res.json('Item deletado')
+    } catch (error){
+        console.log(error)
+    }
+})
 
 app.listen(5050, () => {
     console.log('O servidor está rodando em http://localhost:5050')
