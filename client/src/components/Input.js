@@ -7,7 +7,7 @@ const InputTodo = () => {
         e.preventDefault()
         try{
             const body = { description }
-            const response = await fetch('http://localhost:5050/todos', {
+            const response = await fetch('http://localhost:5050/todos/', {
                 method: 'POST',
                 headers: {'Content-Type':'application/json'},
                 body: JSON.stringify(body)
@@ -29,10 +29,10 @@ const InputTodo = () => {
                         value={description} 
                         onChange={e => setDescription(e.target.value)}
                     />
-                    <button className='btn btn-success' type="button">Adicionar</button>
+                    <button className='btn btn-success' type="submit">Adicionar</button>
                 </div>
             </form>
         </Fragment>
     )
 }
-export default InputTodo
+export default InputTodo;
