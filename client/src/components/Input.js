@@ -22,9 +22,10 @@ const InputTodo = () => {
         <Fragment>
             <h1 className='text-center mt-5'>Afazeres</h1>
             <form className='width f-flex mt-5' onSubmit={Submiting}>
-                <div class="input-group mb-3">                    <input  
+                <div className="input-group mb-3">                    
+                    <input  
                         type='text' 
-                        class="form-control"
+                        className="form-control"
                         // className='form-control' 
                         value={description} 
                         onChange={e => setDescription(e.target.value)}

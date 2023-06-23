@@ -40,7 +40,6 @@ app.get('/todos/:id', async(req, res) => {
 })
 
 // Listar todos
-
 app.get('/todos/', async(req, res) => {
     try{
         const {id} = req.params;
