@@ -50,11 +50,11 @@ app.get('/todos/', async(req, res) => {
     }
 })
 
-// Atualizar item
+// Atualizar itemz
 app.put('/todos/:id', async (req, res) => {
     try{
         const { id } = req.params
-        const {description} = req.body
+        const { description } = req.body
         const updateTodo = await pool.query.query(
             "UPDATE todo SET description = $1 WHERE todo_id = $2",
             [description, id]
@@ -80,5 +80,5 @@ app.delete('/todos/:id', async (req, res) => {
 })
 
 app.listen(5050, () => {
-    console.log('O servidor está rodando em http://localhost:5050')
+    console.log('O servidor To-to-list está rodando em http://localhost:5050/todos/')
 })
