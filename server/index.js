@@ -1,11 +1,11 @@
 const express = require('express')
-const app = express()
 const cors = require('cors')
 const pool = require('./db')
+const app = express()
 
 // Middleware
-app.use(cors())
-app.use(express.json())
+app.use(cors())// app use cors
+app.use(express.json())// app use express no formato json
 
 // app.get('/todos', (req,res) => {
 //         res.json()
@@ -13,18 +13,20 @@ app.use(express.json())
     
 // Rotas
 // inserir item
-app.post("/todos", async (req, res) => {
-    try {
-        const { description } = req.body;
-        const newTodo = await pool.query("INSERT INTO todo (description) VALUES($1) RETURNING *",
-        [description]
-        )
-        res.json(newTodo.rows[0])
+app.post("/todos", async (req, res) => {// app postar no caminho "/todos", func assincrona(par_requisicao, par_resposta) funcao de flecha
+    try {// tente
+        const { description } = req.body;// const { descricao } valor igual ao par_respost chamar corpo
+
+        // const novoAfazer = aguarde consulta de pool("INSERIR EM afazer (tabela_descricao) VALORES($1) RETORNANDO *")
+        
+        const newTodo = await pool.query("INSERT INTO todo (description) VALUES($1) RETURNING *;", [description]);// const descricao
+        
+        res.json(newTodo.rows[0]);// par_resposta chamar metodo json em(novoAfazer chamar linhas[indice_0])
     } catch (error){
         // console.error(error.message)
-        console.log(error)
+        console.log(error);
     }
-})
+});
 
 
 
@@ -55,7 +57,7 @@ app.put('/todos/:id', async (req, res) => {
     try{
         const { id } = req.params
         const { description } = req.body
-        const updateTodo = await pool.query.query(
+        const updateTodo = await pool.query(
             "UPDATE todo SET description = $1 WHERE todo_id = $2",
             [description, id]
         )
@@ -73,12 +75,12 @@ app.delete('/todos/:id', async (req, res) => {
             "DELETE FROM todo WHERE todo_id = $1",
             [id]
         )
-        res.json('Item deletado')
+        res.json("Item deletado com sucesso!")
     } catch (error){
         console.log(error)
     }
 })
 
 app.listen(5050, () => {
-    console.log('O servidor To-to-list está rodando em http://localhost:5050/todos/')
+    console.log('O servidor To-to-list está rodando em http://localhost:5050/todos')
 })
