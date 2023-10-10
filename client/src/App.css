@@ -4,11 +4,39 @@
   box-sizing: border-box;
 }
 
+.mt-5{
+  margin: 20px 0!important;
+}
+
 .table tr td{
   vertical-align: middle;
 }
 
+.table tr td:first-of-type input[type=checkbox]{
+  margin-top: 5px;
+  border-radius: 50px;
+}
+
+h4 {
+  margin: 0;
+}
+
+.modal-header .close{
+  padding: 5px 10px;
+  font-size: 1rem;
+}
+
 .completed{
-  text-decoration: line-through; /* Isso adicionará uma linha através do texto */
-  color: #888; /* Altere a cor para ficar mais sutil se desejar */
+  text-decoration:line-through; /* Isso adicionará uma linha através do texto */
+  color: #888!important; /* Altere a cor para ficar mais sutil se desejar */
+}
+
+@media screen and (max-width:580px) {
+  .table{
+    font-size: 0.7rem;
+  }
+
+ .btn{
+  --bs-btn-font-size: 0.7rem!important;
+  }
 }
