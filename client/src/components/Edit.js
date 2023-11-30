@@ -9,7 +9,7 @@ const EditTodo = ({ todo }) => {// constante EditTodo = ({ parametro }) => (arro
         // console.log('123');
         
         try {// tentar
-            const body = { description }; // constante_corpo = { parametro description}
+            const body = { description }; // constante_corpo = { parametro descricao}
             const response = await fetch(`
             http://localhost:5050/todos/${todo.todo_id}
             `,
