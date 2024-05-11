@@ -55,6 +55,7 @@ const EditTodo = ({ todo }) => {// constante EditTodo = ({ parametro }) => (arro
                         </div>{/* modal-header */}
 
                         <div className="modal-body">
+                            <label for={description}>Descrição:</label>
                             <input 
                                 type="text"
                                 className="form-control"

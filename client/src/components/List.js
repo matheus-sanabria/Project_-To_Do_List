@@ -55,7 +55,8 @@ const ListTodo = () => {
           </tr>
         </thead>
         <tbody>
-          {todos.map((todo) => (
+          {
+          todos.map((todo) => (
             <tr key={todo.todo_id}>
               <td>
                 <input
@@ -80,7 +81,8 @@ const ListTodo = () => {
                 </button>
               </td>
             </tr>
-          ))}
+          ))
+          }
         </tbody>
       </table>
     </Fragment>

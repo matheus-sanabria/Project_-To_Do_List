@@ -30,7 +30,7 @@ app.post("/todos", async (req, res) => {// app postar no caminho "/todos", func 
 
 
 
-// Listar
+// Listar item especifico
 app.get('/todos/:id', async(req, res) => {
     try{
         const {id} = req.params;
