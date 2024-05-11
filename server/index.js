@@ -19,7 +19,7 @@ app.post("/todos", async (req, res) => {// app postar no caminho "/todos", func 
 
         // const novoAfazer = aguarde consulta de pool("INSERIR EM afazer (tabela_descricao) VALORES($1) RETORNANDO *")
         
-        const newTodo = await pool.query("INSERT INTO todo (description) VALUES($1) RETURNING *;", [description]);// const descricao
+        const newTodo = await pool.query("INSERT INTO todos (description) VALUES($1) RETURNING *;", [description]);// const descricao
         
         res.json(newTodo.rows[0]);// par_resposta chamar metodo json em(novoAfazer chamar linhas[indice_0])
     } catch (error){
@@ -34,8 +34,8 @@ app.post("/todos", async (req, res) => {// app postar no caminho "/todos", func 
 app.get('/todos/:id', async(req, res) => {
     try{
         const {id} = req.params;
-        const todo = await pool.query('SELECT * FROM todo where todo_id = $1', [id])
-        res.json(todo.rows[0])
+        const todos = await pool.query('SELECT * FROM todos where todo_id = $1', [id])
+        res.json(todos.rows[0])
     } catch (error){
         console.log(error)
     }
@@ -45,8 +45,8 @@ app.get('/todos/:id', async(req, res) => {
 app.get('/todos/', async(req, res) => {
     try{
         const {id} = req.params;
-        const todo = await pool.query('SELECT * FROM todo')
-        res.json(todo.rows)
+        const todos = await pool.query('SELECT * FROM todos')
+        res.json(todos.rows)
     } catch (error){
         console.log(error)
     }
@@ -57,11 +57,12 @@ app.put('/todos/:id', async (req, res) => {
     try{
         const { id } = req.params
         const { description } = req.body
+        
         const updateTodo = await pool.query(
-            "UPDATE todo SET description = $1 WHERE todo_id = $2",
+            "UPDATE todos SET description, status = $1 WHERE todo_id = $2",
             [description, id]
         )
-        res.json('Item atualizado')
+        res.json('Item atualizado!')
     } catch (error){
         console.log(error)
     }
@@ -72,7 +73,7 @@ app.delete('/todos/:id', async (req, res) => {
         const { id } = req.params
         const {description} = req.body
         const deleteTodo = await pool.query(
-            "DELETE FROM todo WHERE todo_id = $1",
+            "DELETE FROM todos WHERE todo_id = $1",
             [id]
         )
         res.json("Item deletado com sucesso!")
